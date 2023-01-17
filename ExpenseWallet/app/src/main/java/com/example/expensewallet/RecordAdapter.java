@@ -44,6 +44,8 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
             public void onClick(View view) {
                 Intent pindahUpdate = new Intent(context,UpdateRecord.class);
                 pindahUpdate.putExtra("id",record.getId());
+                pindahUpdate.putExtra("name",record.getName());
+                pindahUpdate.putExtra("amount",record.getAmount());
                 context.startActivity(pindahUpdate);
                 notifyDataSetChanged();
             }

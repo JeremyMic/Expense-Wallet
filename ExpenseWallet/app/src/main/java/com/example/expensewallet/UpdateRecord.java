@@ -35,6 +35,11 @@ public class UpdateRecord extends AppCompatActivity {
         db = new DBHelper(getApplicationContext());
 
         int id = getIntent().getIntExtra("id",0);
+        String nameUpdate = getIntent().getStringExtra("name");
+        int amountUpdate = getIntent().getIntExtra("amount",0);
+
+        recordNameInput.setText(nameUpdate);
+        recordAmountInput.setText(amountUpdate+"");
 
         updateRecord.setOnClickListener(new View.OnClickListener() {
             @Override
