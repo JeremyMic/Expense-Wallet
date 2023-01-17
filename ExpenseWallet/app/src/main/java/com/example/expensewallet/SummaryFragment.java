@@ -22,7 +22,7 @@ public class SummaryFragment extends Fragment {
     ArrayList<Record> records;
     RecordAdapter recordAdapter;
     DBHelper db;
-    TextView expense, income;
+    TextView expense, income, balance;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -32,7 +32,6 @@ public class SummaryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-//        expense.setText(expenseSum);
         return inflater.inflate(R.layout.fragment_summary, container, false);
     }
 
@@ -41,6 +40,7 @@ public class SummaryFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         expense = view.findViewById(R.id.expense);
         income = view.findViewById(R.id.income);
+        balance = view.findViewById(R.id.balance);
 
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -60,6 +60,7 @@ public class SummaryFragment extends Fragment {
 
         int totalExpense = 0;
         int totalIncome = 0;
+        int totalBalance = 0;
         for (Record record: records) {
             if(record.getType().equals("Expense")){
                 totalExpense += record.getAmount();
@@ -67,8 +68,10 @@ public class SummaryFragment extends Fragment {
                 totalIncome += record.getAmount();
             }
         }
+        totalBalance = totalIncome - totalExpense;
 
         expense.setText("Total Expense: Rp."+totalExpense + ",-");
         income.setText("Total Income: Rp." +totalIncome + ",-");
+        balance.setText("Total Balance: Rp." + totalBalance + ",-");
     }
 }
